@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.red.figureapi.db.dao.ResultDao">
+  <resultMap id="BaseResultMap" type="com.red.figureapi.db.pojo.Result">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="loan_amnt" jdbcType="DOUBLE" property="loanAmnt" />
+    <result column="funded_amnt" jdbcType="DOUBLE" property="fundedAmnt" />
+    <result column="funded_amnt_inv" jdbcType="DOUBLE" property="fundedAmntInv" />
+    <result column="term" jdbcType="VARCHAR" property="term" />
+    <result column="int_rate" jdbcType="DOUBLE" property="intRate" />
+    <result column="installment" jdbcType="DOUBLE" property="installment" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="sub_grade" jdbcType="VARCHAR" property="subGrade" />
+    <result column="emp_title" jdbcType="VARCHAR" property="empTitle" />
+    <result column="emp_length" jdbcType="VARCHAR" property="empLength" />
+    <result column="home_ownership" jdbcType="VARCHAR" property="homeOwnership" />
+    <result column="annual_inc" jdbcType="DOUBLE" property="annualInc" />
+    <result column="verification_status" jdbcType="VARCHAR" property="verificationStatus" />
+    <result column="issue_d" jdbcType="VARCHAR" property="issueD" />
+    <result column="loan_status" jdbcType="VARCHAR" property="loanStatus" />
+    <result column="pymnt_plan" jdbcType="VARCHAR" property="pymntPlan" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="addr_state" jdbcType="VARCHAR" property="addrState" />
+    <result column="dti" jdbcType="DOUBLE" property="dti" />
+    <result column="delinq_2yrs" jdbcType="DOUBLE" property="delinq2yrs" />
+    <result column="earliest_cr_line" jdbcType="VARCHAR" property="earliestCrLine" />
+    <result column="inq_last_6mths" jdbcType="DOUBLE" property="inqLast6mths" />
+    <result column="mths_since_last_delinq" jdbcType="DOUBLE" property="mthsSinceLastDelinq" />
+    <result column="mths_since_last_record" jdbcType="DOUBLE" property="mthsSinceLastRecord" />
+    <result column="open_acc" jdbcType="DOUBLE" property="openAcc" />
+    <result column="pub_rec" jdbcType="DOUBLE" property="pubRec" />
+    <result column="revol_bal" jdbcType="DOUBLE" property="revolBal" />
+    <result column="revol_util" jdbcType="DOUBLE" property="revolUtil" />
+    <result column="total_acc" jdbcType="DOUBLE" property="totalAcc" />
+    <result column="initial_list_status" jdbcType="VARCHAR" property="initialListStatus" />
+    <result column="out_prncp" jdbcType="DOUBLE" property="outPrncp" />
+    <result column="out_prncp_inv" jdbcType="DOUBLE" property="outPrncpInv" />
+    <result column="total_pymnt" jdbcType="DOUBLE" property="totalPymnt" />
+    <result column="total_pymnt_inv" jdbcType="DOUBLE" property="totalPymntInv" />
+    <result column="total_rec_prncp" jdbcType="DOUBLE" property="totalRecPrncp" />
+    <result column="total_rec_int" jdbcType="DOUBLE" property="totalRecInt" />
+    <result column="total_rec_late_fee" jdbcType="DOUBLE" property="totalRecLateFee" />
+    <result column="recoveries" jdbcType="DOUBLE" property="recoveries" />
+    <result column="collection_recovery_fee" jdbcType="DOUBLE" property="collectionRecoveryFee" />
+    <result column="last_pymnt_d" jdbcType="VARCHAR" property="lastPymntD" />
+    <result column="last_pymnt_amnt" jdbcType="DOUBLE" property="lastPymntAmnt" />
+    <result column="next_pymnt_d" jdbcType="VARCHAR" property="nextPymntD" />
+    <result column="last_credit_pull_d" jdbcType="VARCHAR" property="lastCreditPullD" />
+    <result column="collections_12_mths_ex_med" jdbcType="DOUBLE" property="collections12MthsExMed" />
+    <result column="mths_since_last_major_derog" jdbcType="DOUBLE" property="mthsSinceLastMajorDerog" />
+    <result column="policy_code" jdbcType="DOUBLE" property="policyCode" />
+    <result column="application_type" jdbcType="VARCHAR" property="applicationType" />
+    <result column="annual_inc_joint" jdbcType="DOUBLE" property="annualIncJoint" />
+    <result column="dti_joint" jdbcType="DOUBLE" property="dtiJoint" />
+    <result column="verification_status_joint" jdbcType="VARCHAR" property="verificationStatusJoint" />
+    <result column="acc_now_delinq" jdbcType="DOUBLE" property="accNowDelinq" />
+    <result column="tot_coll_amt" jdbcType="DOUBLE" property="totCollAmt" />
+    <result column="tot_cur_bal" jdbcType="DOUBLE" property="totCurBal" />
+    <result column="open_acc_6m" jdbcType="DOUBLE" property="openAcc6m" />
+    <result column="open_il_6m" jdbcType="DOUBLE" property="openIl6m" />
+    <result column="open_il_12m" jdbcType="DOUBLE" property="openIl12m" />
+    <result column="open_il_24m" jdbcType="DOUBLE" property="openIl24m" />
+    <result column="mths_since_rcnt_il" jdbcType="DOUBLE" property="mthsSinceRcntIl" />
+    <result column="total_bal_il" jdbcType="DOUBLE" property="totalBalIl" />
+    <result column="il_util" jdbcType="DOUBLE" property="ilUtil" />
+    <result column="open_rv_12m" jdbcType="DOUBLE" property="openRv12m" />
+    <result column="open_rv_24m" jdbcType="DOUBLE" property="openRv24m" />
+    <result column="max_bal_bc" jdbcType="DOUBLE" property="maxBalBc" />
+    <result column="all_util" jdbcType="DOUBLE" property="allUtil" />
+    <result column="total_rev_hi_lim" jdbcType="DOUBLE" property="totalRevHiLim" />
+    <result column="inq_fi" jdbcType="DOUBLE" property="inqFi" />
+    <result column="total_cu_tl" jdbcType="DOUBLE" property="totalCuTl" />
+    <result column="inq_last_12m" jdbcType="DOUBLE" property="inqLast12m" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_id, loan_amnt, funded_amnt, funded_amnt_inv, term, int_rate, installment, 
+    grade, sub_grade, emp_title, emp_length, home_ownership, annual_inc, verification_status, 
+    issue_d, loan_status, pymnt_plan, url, `desc`, purpose, title, zip_code, addr_state, 
+    dti, delinq_2yrs, earliest_cr_line, inq_last_6mths, mths_since_last_delinq, mths_since_last_record, 
+    open_acc, pub_rec, revol_bal, revol_util, total_acc, initial_list_status, out_prncp, 
+    out_prncp_inv, total_pymnt, total_pymnt_inv, total_rec_prncp, total_rec_int, total_rec_late_fee, 
+    recoveries, collection_recovery_fee, last_pymnt_d, last_pymnt_amnt, next_pymnt_d, 
+    last_credit_pull_d, collections_12_mths_ex_med, mths_since_last_major_derog, policy_code, 
+    application_type, annual_inc_joint, dti_joint, verification_status_joint, acc_now_delinq, 
+    tot_coll_amt, tot_cur_bal, open_acc_6m, open_il_6m, open_il_12m, open_il_24m, mths_since_rcnt_il, 
+    total_bal_il, il_util, open_rv_12m, open_rv_24m, max_bal_bc, all_util, total_rev_hi_lim, 
+    inq_fi, total_cu_tl, inq_last_12m
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loan_rd
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from loan_rd
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="member_id" keyProperty="memberId" parameterType="com.red.figureapi.db.pojo.Result" useGeneratedKeys="true">
+    insert into loan_rd (id, loan_amnt, funded_amnt, 
+      funded_amnt_inv, term, int_rate, 
+      installment, grade, sub_grade, 
+      emp_title, emp_length, home_ownership, 
+      annual_inc, verification_status, issue_d, 
+      loan_status, pymnt_plan, url, 
+      `desc`, purpose, title, 
+      zip_code, addr_state, dti, 
+      delinq_2yrs, earliest_cr_line, inq_last_6mths, 
+      mths_since_last_delinq, mths_since_last_record, 
+      open_acc, pub_rec, revol_bal, 
+      revol_util, total_acc, initial_list_status, 
+      out_prncp, out_prncp_inv, total_pymnt, 
+      total_pymnt_inv, total_rec_prncp, total_rec_int, 
+      total_rec_late_fee, recoveries, collection_recovery_fee, 
+      last_pymnt_d, last_pymnt_amnt, next_pymnt_d, 
+      last_credit_pull_d, collections_12_mths_ex_med, 
+      mths_since_last_major_derog, policy_code, application_type, 
+      annual_inc_joint, dti_joint, verification_status_joint, 
+      acc_now_delinq, tot_coll_amt, tot_cur_bal, 
+      open_acc_6m, open_il_6m, open_il_12m, 
+      open_il_24m, mths_since_rcnt_il, total_bal_il, 
+      il_util, open_rv_12m, open_rv_24m, 
+      max_bal_bc, all_util, total_rev_hi_lim, 
+      inq_fi, total_cu_tl, inq_last_12m
+      )
+    values (#{id,jdbcType=INTEGER}, #{loanAmnt,jdbcType=DOUBLE}, #{fundedAmnt,jdbcType=DOUBLE}, 
+      #{fundedAmntInv,jdbcType=DOUBLE}, #{term,jdbcType=VARCHAR}, #{intRate,jdbcType=DOUBLE}, 
+      #{installment,jdbcType=DOUBLE}, #{grade,jdbcType=VARCHAR}, #{subGrade,jdbcType=VARCHAR}, 
+      #{empTitle,jdbcType=VARCHAR}, #{empLength,jdbcType=VARCHAR}, #{homeOwnership,jdbcType=VARCHAR}, 
+      #{annualInc,jdbcType=DOUBLE}, #{verificationStatus,jdbcType=VARCHAR}, #{issueD,jdbcType=VARCHAR}, 
+      #{loanStatus,jdbcType=VARCHAR}, #{pymntPlan,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{addrState,jdbcType=VARCHAR}, #{dti,jdbcType=DOUBLE}, 
+      #{delinq2yrs,jdbcType=DOUBLE}, #{earliestCrLine,jdbcType=VARCHAR}, #{inqLast6mths,jdbcType=DOUBLE}, 
+      #{mthsSinceLastDelinq,jdbcType=DOUBLE}, #{mthsSinceLastRecord,jdbcType=DOUBLE}, 
+      #{openAcc,jdbcType=DOUBLE}, #{pubRec,jdbcType=DOUBLE}, #{revolBal,jdbcType=DOUBLE}, 
+      #{revolUtil,jdbcType=DOUBLE}, #{totalAcc,jdbcType=DOUBLE}, #{initialListStatus,jdbcType=VARCHAR}, 
+      #{outPrncp,jdbcType=DOUBLE}, #{outPrncpInv,jdbcType=DOUBLE}, #{totalPymnt,jdbcType=DOUBLE}, 
+      #{totalPymntInv,jdbcType=DOUBLE}, #{totalRecPrncp,jdbcType=DOUBLE}, #{totalRecInt,jdbcType=DOUBLE}, 
+      #{totalRecLateFee,jdbcType=DOUBLE}, #{recoveries,jdbcType=DOUBLE}, #{collectionRecoveryFee,jdbcType=DOUBLE}, 
+      #{lastPymntD,jdbcType=VARCHAR}, #{lastPymntAmnt,jdbcType=DOUBLE}, #{nextPymntD,jdbcType=VARCHAR}, 
+      #{lastCreditPullD,jdbcType=VARCHAR}, #{collections12MthsExMed,jdbcType=DOUBLE}, 
+      #{mthsSinceLastMajorDerog,jdbcType=DOUBLE}, #{policyCode,jdbcType=DOUBLE}, #{applicationType,jdbcType=VARCHAR}, 
+      #{annualIncJoint,jdbcType=DOUBLE}, #{dtiJoint,jdbcType=DOUBLE}, #{verificationStatusJoint,jdbcType=VARCHAR}, 
+      #{accNowDelinq,jdbcType=DOUBLE}, #{totCollAmt,jdbcType=DOUBLE}, #{totCurBal,jdbcType=DOUBLE}, 
+      #{openAcc6m,jdbcType=DOUBLE}, #{openIl6m,jdbcType=DOUBLE}, #{openIl12m,jdbcType=DOUBLE}, 
+      #{openIl24m,jdbcType=DOUBLE}, #{mthsSinceRcntIl,jdbcType=DOUBLE}, #{totalBalIl,jdbcType=DOUBLE}, 
+      #{ilUtil,jdbcType=DOUBLE}, #{openRv12m,jdbcType=DOUBLE}, #{openRv24m,jdbcType=DOUBLE}, 
+      #{maxBalBc,jdbcType=DOUBLE}, #{allUtil,jdbcType=DOUBLE}, #{totalRevHiLim,jdbcType=DOUBLE}, 
+      #{inqFi,jdbcType=DOUBLE}, #{totalCuTl,jdbcType=DOUBLE}, #{inqLast12m,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="member_id" keyProperty="memberId" parameterType="com.red.figureapi.db.pojo.Result" useGeneratedKeys="true">
+    insert into loan_rd
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loanAmnt != null">
+        loan_amnt,
+      </if>
+      <if test="fundedAmnt != null">
+        funded_amnt,
+      </if>
+      <if test="fundedAmntInv != null">
+        funded_amnt_inv,
+      </if>
+      <if test="term != null">
+        term,
+      </if>
+      <if test="intRate != null">
+        int_rate,
+      </if>
+      <if test="installment != null">
+        installment,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="subGrade != null">
+        sub_grade,
+      </if>
+      <if test="empTitle != null">
+        emp_title,
+      </if>
+      <if test="empLength != null">
+        emp_length,
+      </if>
+      <if test="homeOwnership != null">
+        home_ownership,
+      </if>
+      <if test="annualInc != null">
+        annual_inc,
+      </if>
+      <if test="verificationStatus != null">
+        verification_status,
+      </if>
+      <if test="issueD != null">
+        issue_d,
+      </if>
+      <if test="loanStatus != null">
+        loan_status,
+      </if>
+      <if test="pymntPlan != null">
+        pymnt_plan,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="desc != null">
+        `desc`,
+      </if>
+      <if test="purpose != null">
+        purpose,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="addrState != null">
+        addr_state,
+      </if>
+      <if test="dti != null">
+        dti,
+      </if>
+      <if test="delinq2yrs != null">
+        delinq_2yrs,
+      </if>
+      <if test="earliestCrLine != null">
+        earliest_cr_line,
+      </if>
+      <if test="inqLast6mths != null">
+        inq_last_6mths,
+      </if>
+      <if test="mthsSinceLastDelinq != null">
+        mths_since_last_delinq,
+      </if>
+      <if test="mthsSinceLastRecord != null">
+        mths_since_last_record,
+      </if>
+      <if test="openAcc != null">
+        open_acc,
+      </if>
+      <if test="pubRec != null">
+        pub_rec,
+      </if>
+      <if test="revolBal != null">
+        revol_bal,
+      </if>
+      <if test="revolUtil != null">
+        revol_util,
+      </if>
+      <if test="totalAcc != null">
+        total_acc,
+      </if>
+      <if test="initialListStatus != null">
+        initial_list_status,
+      </if>
+      <if test="outPrncp != null">
+        out_prncp,
+      </if>
+      <if test="outPrncpInv != null">
+        out_prncp_inv,
+      </if>
+      <if test="totalPymnt != null">
+        total_pymnt,
+      </if>
+      <if test="totalPymntInv != null">
+        total_pymnt_inv,
+      </if>
+      <if test="totalRecPrncp != null">
+        total_rec_prncp,
+      </if>
+      <if test="totalRecInt != null">
+        total_rec_int,
+      </if>
+      <if test="totalRecLateFee != null">
+        total_rec_late_fee,
+      </if>
+      <if test="recoveries != null">
+        recoveries,
+      </if>
+      <if test="collectionRecoveryFee != null">
+        collection_recovery_fee,
+      </if>
+      <if test="lastPymntD != null">
+        last_pymnt_d,
+      </if>
+      <if test="lastPymntAmnt != null">
+        last_pymnt_amnt,
+      </if>
+      <if test="nextPymntD != null">
+        next_pymnt_d,
+      </if>
+      <if test="lastCreditPullD != null">
+        last_credit_pull_d,
+      </if>
+      <if test="collections12MthsExMed != null">
+        collections_12_mths_ex_med,
+      </if>
+      <if test="mthsSinceLastMajorDerog != null">
+        mths_since_last_major_derog,
+      </if>
+      <if test="policyCode != null">
+        policy_code,
+      </if>
+      <if test="applicationType != null">
+        application_type,
+      </if>
+      <if test="annualIncJoint != null">
+        annual_inc_joint,
+      </if>
+      <if test="dtiJoint != null">
+        dti_joint,
+      </if>
+      <if test="verificationStatusJoint != null">
+        verification_status_joint,
+      </if>
+      <if test="accNowDelinq != null">
+        acc_now_delinq,
+      </if>
+      <if test="totCollAmt != null">
+        tot_coll_amt,
+      </if>
+      <if test="totCurBal != null">
+        tot_cur_bal,
+      </if>
+      <if test="openAcc6m != null">
+        open_acc_6m,
+      </if>
+      <if test="openIl6m != null">
+        open_il_6m,
+      </if>
+      <if test="openIl12m != null">
+        open_il_12m,
+      </if>
+      <if test="openIl24m != null">
+        open_il_24m,
+      </if>
+      <if test="mthsSinceRcntIl != null">
+        mths_since_rcnt_il,
+      </if>
+      <if test="totalBalIl != null">
+        total_bal_il,
+      </if>
+      <if test="ilUtil != null">
+        il_util,
+      </if>
+      <if test="openRv12m != null">
+        open_rv_12m,
+      </if>
+      <if test="openRv24m != null">
+        open_rv_24m,
+      </if>
+      <if test="maxBalBc != null">
+        max_bal_bc,
+      </if>
+      <if test="allUtil != null">
+        all_util,
+      </if>
+      <if test="totalRevHiLim != null">
+        total_rev_hi_lim,
+      </if>
+      <if test="inqFi != null">
+        inq_fi,
+      </if>
+      <if test="totalCuTl != null">
+        total_cu_tl,
+      </if>
+      <if test="inqLast12m != null">
+        inq_last_12m,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loanAmnt != null">
+        #{loanAmnt,jdbcType=DOUBLE},
+      </if>
+      <if test="fundedAmnt != null">
+        #{fundedAmnt,jdbcType=DOUBLE},
+      </if>
+      <if test="fundedAmntInv != null">
+        #{fundedAmntInv,jdbcType=DOUBLE},
+      </if>
+      <if test="term != null">
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="intRate != null">
+        #{intRate,jdbcType=DOUBLE},
+      </if>
+      <if test="installment != null">
+        #{installment,jdbcType=DOUBLE},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="subGrade != null">
+        #{subGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="empTitle != null">
+        #{empTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="empLength != null">
+        #{empLength,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOwnership != null">
+        #{homeOwnership,jdbcType=VARCHAR},
+      </if>
+      <if test="annualInc != null">
+        #{annualInc,jdbcType=DOUBLE},
+      </if>
+      <if test="verificationStatus != null">
+        #{verificationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="issueD != null">
+        #{issueD,jdbcType=VARCHAR},
+      </if>
+      <if test="loanStatus != null">
+        #{loanStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pymntPlan != null">
+        #{pymntPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addrState != null">
+        #{addrState,jdbcType=VARCHAR},
+      </if>
+      <if test="dti != null">
+        #{dti,jdbcType=DOUBLE},
+      </if>
+      <if test="delinq2yrs != null">
+        #{delinq2yrs,jdbcType=DOUBLE},
+      </if>
+      <if test="earliestCrLine != null">
+        #{earliestCrLine,jdbcType=VARCHAR},
+      </if>
+      <if test="inqLast6mths != null">
+        #{inqLast6mths,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceLastDelinq != null">
+        #{mthsSinceLastDelinq,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceLastRecord != null">
+        #{mthsSinceLastRecord,jdbcType=DOUBLE},
+      </if>
+      <if test="openAcc != null">
+        #{openAcc,jdbcType=DOUBLE},
+      </if>
+      <if test="pubRec != null">
+        #{pubRec,jdbcType=DOUBLE},
+      </if>
+      <if test="revolBal != null">
+        #{revolBal,jdbcType=DOUBLE},
+      </if>
+      <if test="revolUtil != null">
+        #{revolUtil,jdbcType=DOUBLE},
+      </if>
+      <if test="totalAcc != null">
+        #{totalAcc,jdbcType=DOUBLE},
+      </if>
+      <if test="initialListStatus != null">
+        #{initialListStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="outPrncp != null">
+        #{outPrncp,jdbcType=DOUBLE},
+      </if>
+      <if test="outPrncpInv != null">
+        #{outPrncpInv,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPymnt != null">
+        #{totalPymnt,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPymntInv != null">
+        #{totalPymntInv,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRecPrncp != null">
+        #{totalRecPrncp,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRecInt != null">
+        #{totalRecInt,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRecLateFee != null">
+        #{totalRecLateFee,jdbcType=DOUBLE},
+      </if>
+      <if test="recoveries != null">
+        #{recoveries,jdbcType=DOUBLE},
+      </if>
+      <if test="collectionRecoveryFee != null">
+        #{collectionRecoveryFee,jdbcType=DOUBLE},
+      </if>
+      <if test="lastPymntD != null">
+        #{lastPymntD,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPymntAmnt != null">
+        #{lastPymntAmnt,jdbcType=DOUBLE},
+      </if>
+      <if test="nextPymntD != null">
+        #{nextPymntD,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCreditPullD != null">
+        #{lastCreditPullD,jdbcType=VARCHAR},
+      </if>
+      <if test="collections12MthsExMed != null">
+        #{collections12MthsExMed,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceLastMajorDerog != null">
+        #{mthsSinceLastMajorDerog,jdbcType=DOUBLE},
+      </if>
+      <if test="policyCode != null">
+        #{policyCode,jdbcType=DOUBLE},
+      </if>
+      <if test="applicationType != null">
+        #{applicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="annualIncJoint != null">
+        #{annualIncJoint,jdbcType=DOUBLE},
+      </if>
+      <if test="dtiJoint != null">
+        #{dtiJoint,jdbcType=DOUBLE},
+      </if>
+      <if test="verificationStatusJoint != null">
+        #{verificationStatusJoint,jdbcType=VARCHAR},
+      </if>
+      <if test="accNowDelinq != null">
+        #{accNowDelinq,jdbcType=DOUBLE},
+      </if>
+      <if test="totCollAmt != null">
+        #{totCollAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="totCurBal != null">
+        #{totCurBal,jdbcType=DOUBLE},
+      </if>
+      <if test="openAcc6m != null">
+        #{openAcc6m,jdbcType=DOUBLE},
+      </if>
+      <if test="openIl6m != null">
+        #{openIl6m,jdbcType=DOUBLE},
+      </if>
+      <if test="openIl12m != null">
+        #{openIl12m,jdbcType=DOUBLE},
+      </if>
+      <if test="openIl24m != null">
+        #{openIl24m,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceRcntIl != null">
+        #{mthsSinceRcntIl,jdbcType=DOUBLE},
+      </if>
+      <if test="totalBalIl != null">
+        #{totalBalIl,jdbcType=DOUBLE},
+      </if>
+      <if test="ilUtil != null">
+        #{ilUtil,jdbcType=DOUBLE},
+      </if>
+      <if test="openRv12m != null">
+        #{openRv12m,jdbcType=DOUBLE},
+      </if>
+      <if test="openRv24m != null">
+        #{openRv24m,jdbcType=DOUBLE},
+      </if>
+      <if test="maxBalBc != null">
+        #{maxBalBc,jdbcType=DOUBLE},
+      </if>
+      <if test="allUtil != null">
+        #{allUtil,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRevHiLim != null">
+        #{totalRevHiLim,jdbcType=DOUBLE},
+      </if>
+      <if test="inqFi != null">
+        #{inqFi,jdbcType=DOUBLE},
+      </if>
+      <if test="totalCuTl != null">
+        #{totalCuTl,jdbcType=DOUBLE},
+      </if>
+      <if test="inqLast12m != null">
+        #{inqLast12m,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.red.figureapi.db.pojo.Result">
+    update loan_rd
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="loanAmnt != null">
+        loan_amnt = #{loanAmnt,jdbcType=DOUBLE},
+      </if>
+      <if test="fundedAmnt != null">
+        funded_amnt = #{fundedAmnt,jdbcType=DOUBLE},
+      </if>
+      <if test="fundedAmntInv != null">
+        funded_amnt_inv = #{fundedAmntInv,jdbcType=DOUBLE},
+      </if>
+      <if test="term != null">
+        term = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="intRate != null">
+        int_rate = #{intRate,jdbcType=DOUBLE},
+      </if>
+      <if test="installment != null">
+        installment = #{installment,jdbcType=DOUBLE},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="subGrade != null">
+        sub_grade = #{subGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="empTitle != null">
+        emp_title = #{empTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="empLength != null">
+        emp_length = #{empLength,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOwnership != null">
+        home_ownership = #{homeOwnership,jdbcType=VARCHAR},
+      </if>
+      <if test="annualInc != null">
+        annual_inc = #{annualInc,jdbcType=DOUBLE},
+      </if>
+      <if test="verificationStatus != null">
+        verification_status = #{verificationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="issueD != null">
+        issue_d = #{issueD,jdbcType=VARCHAR},
+      </if>
+      <if test="loanStatus != null">
+        loan_status = #{loanStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pymntPlan != null">
+        pymnt_plan = #{pymntPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        `desc` = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addrState != null">
+        addr_state = #{addrState,jdbcType=VARCHAR},
+      </if>
+      <if test="dti != null">
+        dti = #{dti,jdbcType=DOUBLE},
+      </if>
+      <if test="delinq2yrs != null">
+        delinq_2yrs = #{delinq2yrs,jdbcType=DOUBLE},
+      </if>
+      <if test="earliestCrLine != null">
+        earliest_cr_line = #{earliestCrLine,jdbcType=VARCHAR},
+      </if>
+      <if test="inqLast6mths != null">
+        inq_last_6mths = #{inqLast6mths,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceLastDelinq != null">
+        mths_since_last_delinq = #{mthsSinceLastDelinq,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceLastRecord != null">
+        mths_since_last_record = #{mthsSinceLastRecord,jdbcType=DOUBLE},
+      </if>
+      <if test="openAcc != null">
+        open_acc = #{openAcc,jdbcType=DOUBLE},
+      </if>
+      <if test="pubRec != null">
+        pub_rec = #{pubRec,jdbcType=DOUBLE},
+      </if>
+      <if test="revolBal != null">
+        revol_bal = #{revolBal,jdbcType=DOUBLE},
+      </if>
+      <if test="revolUtil != null">
+        revol_util = #{revolUtil,jdbcType=DOUBLE},
+      </if>
+      <if test="totalAcc != null">
+        total_acc = #{totalAcc,jdbcType=DOUBLE},
+      </if>
+      <if test="initialListStatus != null">
+        initial_list_status = #{initialListStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="outPrncp != null">
+        out_prncp = #{outPrncp,jdbcType=DOUBLE},
+      </if>
+      <if test="outPrncpInv != null">
+        out_prncp_inv = #{outPrncpInv,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPymnt != null">
+        total_pymnt = #{totalPymnt,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPymntInv != null">
+        total_pymnt_inv = #{totalPymntInv,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRecPrncp != null">
+        total_rec_prncp = #{totalRecPrncp,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRecInt != null">
+        total_rec_int = #{totalRecInt,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRecLateFee != null">
+        total_rec_late_fee = #{totalRecLateFee,jdbcType=DOUBLE},
+      </if>
+      <if test="recoveries != null">
+        recoveries = #{recoveries,jdbcType=DOUBLE},
+      </if>
+      <if test="collectionRecoveryFee != null">
+        collection_recovery_fee = #{collectionRecoveryFee,jdbcType=DOUBLE},
+      </if>
+      <if test="lastPymntD != null">
+        last_pymnt_d = #{lastPymntD,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPymntAmnt != null">
+        last_pymnt_amnt = #{lastPymntAmnt,jdbcType=DOUBLE},
+      </if>
+      <if test="nextPymntD != null">
+        next_pymnt_d = #{nextPymntD,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCreditPullD != null">
+        last_credit_pull_d = #{lastCreditPullD,jdbcType=VARCHAR},
+      </if>
+      <if test="collections12MthsExMed != null">
+        collections_12_mths_ex_med = #{collections12MthsExMed,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceLastMajorDerog != null">
+        mths_since_last_major_derog = #{mthsSinceLastMajorDerog,jdbcType=DOUBLE},
+      </if>
+      <if test="policyCode != null">
+        policy_code = #{policyCode,jdbcType=DOUBLE},
+      </if>
+      <if test="applicationType != null">
+        application_type = #{applicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="annualIncJoint != null">
+        annual_inc_joint = #{annualIncJoint,jdbcType=DOUBLE},
+      </if>
+      <if test="dtiJoint != null">
+        dti_joint = #{dtiJoint,jdbcType=DOUBLE},
+      </if>
+      <if test="verificationStatusJoint != null">
+        verification_status_joint = #{verificationStatusJoint,jdbcType=VARCHAR},
+      </if>
+      <if test="accNowDelinq != null">
+        acc_now_delinq = #{accNowDelinq,jdbcType=DOUBLE},
+      </if>
+      <if test="totCollAmt != null">
+        tot_coll_amt = #{totCollAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="totCurBal != null">
+        tot_cur_bal = #{totCurBal,jdbcType=DOUBLE},
+      </if>
+      <if test="openAcc6m != null">
+        open_acc_6m = #{openAcc6m,jdbcType=DOUBLE},
+      </if>
+      <if test="openIl6m != null">
+        open_il_6m = #{openIl6m,jdbcType=DOUBLE},
+      </if>
+      <if test="openIl12m != null">
+        open_il_12m = #{openIl12m,jdbcType=DOUBLE},
+      </if>
+      <if test="openIl24m != null">
+        open_il_24m = #{openIl24m,jdbcType=DOUBLE},
+      </if>
+      <if test="mthsSinceRcntIl != null">
+        mths_since_rcnt_il = #{mthsSinceRcntIl,jdbcType=DOUBLE},
+      </if>
+      <if test="totalBalIl != null">
+        total_bal_il = #{totalBalIl,jdbcType=DOUBLE},
+      </if>
+      <if test="ilUtil != null">
+        il_util = #{ilUtil,jdbcType=DOUBLE},
+      </if>
+      <if test="openRv12m != null">
+        open_rv_12m = #{openRv12m,jdbcType=DOUBLE},
+      </if>
+      <if test="openRv24m != null">
+        open_rv_24m = #{openRv24m,jdbcType=DOUBLE},
+      </if>
+      <if test="maxBalBc != null">
+        max_bal_bc = #{maxBalBc,jdbcType=DOUBLE},
+      </if>
+      <if test="allUtil != null">
+        all_util = #{allUtil,jdbcType=DOUBLE},
+      </if>
+      <if test="totalRevHiLim != null">
+        total_rev_hi_lim = #{totalRevHiLim,jdbcType=DOUBLE},
+      </if>
+      <if test="inqFi != null">
+        inq_fi = #{inqFi,jdbcType=DOUBLE},
+      </if>
+      <if test="totalCuTl != null">
+        total_cu_tl = #{totalCuTl,jdbcType=DOUBLE},
+      </if>
+      <if test="inqLast12m != null">
+        inq_last_12m = #{inqLast12m,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.red.figureapi.db.pojo.Result">
+    update loan_rd
+    set member_id = #{memberId,jdbcType=INTEGER},
+      loan_amnt = #{loanAmnt,jdbcType=DOUBLE},
+      funded_amnt = #{fundedAmnt,jdbcType=DOUBLE},
+      funded_amnt_inv = #{fundedAmntInv,jdbcType=DOUBLE},
+      term = #{term,jdbcType=VARCHAR},
+      int_rate = #{intRate,jdbcType=DOUBLE},
+      installment = #{installment,jdbcType=DOUBLE},
+      grade = #{grade,jdbcType=VARCHAR},
+      sub_grade = #{subGrade,jdbcType=VARCHAR},
+      emp_title = #{empTitle,jdbcType=VARCHAR},
+      emp_length = #{empLength,jdbcType=VARCHAR},
+      home_ownership = #{homeOwnership,jdbcType=VARCHAR},
+      annual_inc = #{annualInc,jdbcType=DOUBLE},
+      verification_status = #{verificationStatus,jdbcType=VARCHAR},
+      issue_d = #{issueD,jdbcType=VARCHAR},
+      loan_status = #{loanStatus,jdbcType=VARCHAR},
+      pymnt_plan = #{pymntPlan,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      addr_state = #{addrState,jdbcType=VARCHAR},
+      dti = #{dti,jdbcType=DOUBLE},
+      delinq_2yrs = #{delinq2yrs,jdbcType=DOUBLE},
+      earliest_cr_line = #{earliestCrLine,jdbcType=VARCHAR},
+      inq_last_6mths = #{inqLast6mths,jdbcType=DOUBLE},
+      mths_since_last_delinq = #{mthsSinceLastDelinq,jdbcType=DOUBLE},
+      mths_since_last_record = #{mthsSinceLastRecord,jdbcType=DOUBLE},
+      open_acc = #{openAcc,jdbcType=DOUBLE},
+      pub_rec = #{pubRec,jdbcType=DOUBLE},
+      revol_bal = #{revolBal,jdbcType=DOUBLE},
+      revol_util = #{revolUtil,jdbcType=DOUBLE},
+      total_acc = #{totalAcc,jdbcType=DOUBLE},
+      initial_list_status = #{initialListStatus,jdbcType=VARCHAR},
+      out_prncp = #{outPrncp,jdbcType=DOUBLE},
+      out_prncp_inv = #{outPrncpInv,jdbcType=DOUBLE},
+      total_pymnt = #{totalPymnt,jdbcType=DOUBLE},
+      total_pymnt_inv = #{totalPymntInv,jdbcType=DOUBLE},
+      total_rec_prncp = #{totalRecPrncp,jdbcType=DOUBLE},
+      total_rec_int = #{totalRecInt,jdbcType=DOUBLE},
+      total_rec_late_fee = #{totalRecLateFee,jdbcType=DOUBLE},
+      recoveries = #{recoveries,jdbcType=DOUBLE},
+      collection_recovery_fee = #{collectionRecoveryFee,jdbcType=DOUBLE},
+      last_pymnt_d = #{lastPymntD,jdbcType=VARCHAR},
+      last_pymnt_amnt = #{lastPymntAmnt,jdbcType=DOUBLE},
+      next_pymnt_d = #{nextPymntD,jdbcType=VARCHAR},
+      last_credit_pull_d = #{lastCreditPullD,jdbcType=VARCHAR},
+      collections_12_mths_ex_med = #{collections12MthsExMed,jdbcType=DOUBLE},
+      mths_since_last_major_derog = #{mthsSinceLastMajorDerog,jdbcType=DOUBLE},
+      policy_code = #{policyCode,jdbcType=DOUBLE},
+      application_type = #{applicationType,jdbcType=VARCHAR},
+      annual_inc_joint = #{annualIncJoint,jdbcType=DOUBLE},
+      dti_joint = #{dtiJoint,jdbcType=DOUBLE},
+      verification_status_joint = #{verificationStatusJoint,jdbcType=VARCHAR},
+      acc_now_delinq = #{accNowDelinq,jdbcType=DOUBLE},
+      tot_coll_amt = #{totCollAmt,jdbcType=DOUBLE},
+      tot_cur_bal = #{totCurBal,jdbcType=DOUBLE},
+      open_acc_6m = #{openAcc6m,jdbcType=DOUBLE},
+      open_il_6m = #{openIl6m,jdbcType=DOUBLE},
+      open_il_12m = #{openIl12m,jdbcType=DOUBLE},
+      open_il_24m = #{openIl24m,jdbcType=DOUBLE},
+      mths_since_rcnt_il = #{mthsSinceRcntIl,jdbcType=DOUBLE},
+      total_bal_il = #{totalBalIl,jdbcType=DOUBLE},
+      il_util = #{ilUtil,jdbcType=DOUBLE},
+      open_rv_12m = #{openRv12m,jdbcType=DOUBLE},
+      open_rv_24m = #{openRv24m,jdbcType=DOUBLE},
+      max_bal_bc = #{maxBalBc,jdbcType=DOUBLE},
+      all_util = #{allUtil,jdbcType=DOUBLE},
+      total_rev_hi_lim = #{totalRevHiLim,jdbcType=DOUBLE},
+      inq_fi = #{inqFi,jdbcType=DOUBLE},
+      total_cu_tl = #{totalCuTl,jdbcType=DOUBLE},
+      inq_last_12m = #{inqLast12m,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
