@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.red.figureapi.db.dao.UserDao">
+    <select id="searchChargedOffPerson" resultType="hashmap">
+        SELECT u.`name`,
+               u.emp_title,
+               u.emp_length,
+               CAST(u.annual_inc as UNSIGNED INTEGER)   as annual_inc,
+               CAST(u.tot_coll_amt as UNSIGNED INTEGER) as tot_coll_amt,
+               u.addr_state
+        FROM loan_rd AS l,
+             user AS u
+        where l.member_id = u.member_id
+          and l.loan_status = "Charged Off"
+          AND u.emp_length IS NOT NULL
+          AND u.addr_state != "unknown"
+          AND u.emp_title IN
+              ("经理", "司机", "护士", "店经理", "工程师", "管理者", "运营经理", "行政助理", "项目经理", "教师", "销售", "会计师", "总经理", "销售经理", "董事",
+               "办公室主管", "律师", "客户经理", "警官", "分析师", "技术员")
+          AND l.tot_coll_amt != 0
+        LIMIT 0,30;
+    </select>
 
+    <select id="searchLoanInfo" resultType="hashmap">
+        SELECT issue_d   AS "申请时间",
+               loan_amnt AS "贷款金额",
+               term      AS "贷款期数",
+               int_rate  AS "贷款利率",
+               purpose   AS "贷款原因",
+               CASE application_type
+                   WHEN "INDIVIDUAL" THEN
+                       "个人"
+                   ELSE
+                       "联合"
+                   END   AS "是否联合申请"
+        FROM loan_rd
+        where id = #{id};
+    </select>
+
+    <select id="searchTag" resultType="hashmap">
+        SELECT emp_title,
+               zip_code,
+               tot_coll_amt,
+               annual_inc,
+               addr_state,
+               emp_length,
+               CASE home_ownership
+                   WHEN "MORTGAGE" THEN
+                       "有房有贷"
+                   WHEN "OWN" THEN
+                       "有房无贷"
+                   ELSE
+                       "租赁"
+                   END AS home_ownership
+                ,
+               CASE pub_rec
+                   WHEN 0 THEN
+                       "无"
+                   ELSE
+                       "有"
+                   END AS pub_rec
+        FROM loan_rd
+        WHERE id = #{id};
+    </select>
+
+    <select id="getRelation" resultType="hashmap">
+        SELECT *
+        FROM relations
+        where person_a = #{memberId}
+           OR persion_b = #{memberId};
+    </select>
 </mapper>

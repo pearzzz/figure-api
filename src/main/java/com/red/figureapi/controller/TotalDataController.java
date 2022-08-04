@@ -63,6 +63,6 @@ public class TotalDataController {
     public R searchIntRateDistributionOfLoanStatus() {
         List<Map<String, Object>> fullyPaid = totalDataService.searchIntRateDistributionOfLoanStatus("Fully Paid");
         List<Map<String, Object>> chargedOff = totalDataService.searchIntRateDistributionOfLoanStatus("Charged Off");
-        return R.ok().put("Fully Paid", fullyPaid).put("Charged Off", chargedOff);
+        return R.ok().put("FullyPaid", fullyPaid).put("ChargedOff", chargedOff);
     }
 }

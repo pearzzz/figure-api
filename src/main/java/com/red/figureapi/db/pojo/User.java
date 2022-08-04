@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     private String empTitle;
 
-    private String empLength;
+    private Integer empLength;
 
     private String homeOwnership;
 
