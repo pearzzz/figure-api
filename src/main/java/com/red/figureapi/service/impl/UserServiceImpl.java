@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
 
         //收入负债比加入结果
         double dti = userDao.getDti(memberId);
-        result.put("dti", dti);
+        result.put("dti", 100 - dti);
 
         //亲友信誉分加入结果
         List<Map<String, Object>> relation = userDao.getRelation(memberId);
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
         double totalCreditScore = 0;
         double aveCreditScore = 0;
 
-        if (list != null) {
+        if (list.size() == 0) {
             for (int person : list) {
                 Double score = userDao.getCreditScoreByMemberId(person);
                 if (score != null) {
@@ -148,6 +148,8 @@ public class UserServiceImpl implements UserService {
                 }
             }
             aveCreditScore = totalCreditScore/list.size();
+        } else {
+            aveCreditScore = 1;
         }
 
         result.put("relationCredit",aveCreditScore);

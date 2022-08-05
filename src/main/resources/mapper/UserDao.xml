@@ -38,12 +38,12 @@
     </select>
 
     <select id="searchTag" resultType="hashmap">
-        SELECT emp_title,
-               zip_code,
-               tot_coll_amt,
-               annual_inc,
-               addr_state,
-               emp_length,
+        SELECT emp_title as "职业",
+               zip_code as "邮编",
+               tot_coll_amt as "负债",
+               annual_inc as "年收入",
+               addr_state as "地址",
+               emp_length as "工作年限",
                CASE home_ownership
                    WHEN "MORTGAGE" THEN
                        "有房有贷"
@@ -51,14 +51,14 @@
                        "有房无贷"
                    ELSE
                        "租赁"
-                   END AS home_ownership
+                   END as "房产情况"
                 ,
                CASE pub_rec
                    WHEN 0 THEN
                        "无"
                    ELSE
                        "有"
-                   END AS pub_rec
+                   END as "不良信贷记录"
         FROM loan_rd
         WHERE id = #{id};
     </select>
