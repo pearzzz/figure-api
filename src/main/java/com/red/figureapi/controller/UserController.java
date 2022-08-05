@@ -54,4 +54,36 @@ public class UserController {
         int id = Integer.valueOf(request.getParameter("id"));
         return R.ok().put("result", userService.searchTag(id));
     }
+
+    @GetMapping("getRelation")
+    public R getRelation(HttpServletRequest request) {
+        int memberId = Integer.valueOf(request.getParameter("memberId"));
+        String name = userService.getNameByMemberId(memberId);
+        return R.ok().put("memberId", memberId).put("name", name).put("relationship", userService.getRelation(memberId));
+    }
+
+    @GetMapping("getPastRecord")
+    public R getPastRecord(HttpServletRequest request) {
+        int memberId = Integer.valueOf(request.getParameter("memberId"));
+        int id = Integer.valueOf(request.getParameter("id"));
+        return R.ok().put("result", userService.getPastRecord(memberId, id));
+    }
+
+    @GetMapping("getCreditScoreByMemberId")
+    public R getCreditScoreByMemberId(HttpServletRequest request) {
+        int memberId = Integer.valueOf(request.getParameter("memberId"));
+        return R.ok().put("result", userService.getCreditScoreByMemberId(memberId));
+    }
+
+    @GetMapping("getRadarScore")
+    public R getRadarScore(HttpServletRequest request) {
+        int memberId = Integer.valueOf(request.getParameter("memberId"));
+        return R.ok().put("result", userService.getRadarScore(memberId));
+    }
+
+    @GetMapping("getRelationRecord")
+    public R getRelationRecord(HttpServletRequest request) {
+        int memberId = Integer.valueOf(request.getParameter("memberId"));
+        return R.ok().put("result", userService.getPastRecord(memberId, -1));
+    }
 }

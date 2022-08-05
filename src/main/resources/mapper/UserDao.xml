@@ -64,9 +64,51 @@
     </select>
 
     <select id="getRelation" resultType="hashmap">
-        SELECT *
+        SELECT person_a, person_b, relation
         FROM relations
         where person_a = #{memberId}
-           OR persion_b = #{memberId};
+           OR person_b = #{memberId};
+    </select>
+
+    <select id="getNameByMemberId" resultType="string">
+        SELECT `name`
+        FROM `user`
+        WHERE member_id = #{memberId};
+    </select>
+
+    <select id="getPastRecord" resultType="hashmap">
+        SELECT id,
+               issue_d,
+               loan_amnt,
+               term,
+               CASE loan_status
+                   WHEN "Current" THEN
+                       "按期"
+                   WHEN "Fully Paid" THEN
+                       "按期"
+                   ELSE
+                       "逾期"
+                   END AS loan_status
+        FROM loan_rd
+        WHERE member_id = #{memberId}
+          AND id != #{id};
+    </select>
+
+    <select id="getFeature" resultType="hashmap">
+        SELECT past_credit, other_indicators, credit_risk
+        FROM result
+        where member_id = #{memberId};
+    </select>
+
+    <select id="getDti" resultType="double">
+        SELECT dti
+        FROM `user`
+        WHERE member_id = #{memberId};
+    </select>
+
+    <select id="getCreditScoreByMemberId" resultType="java.lang.Double">
+        SELECT credit_score
+        FROM result
+        WHERE member_id = #{memberId};
     </select>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +65,104 @@ public class UserServiceImpl implements UserService {
         List<Map<String, Object>> result = new ArrayList<>();
         List<Map<String, Object>> relation = userDao.getRelation(memberId);
 
-        return null;
+        for (Map map : relation) {
+            Map<String, Object> m = new HashMap<>();
+
+            int personA = (int) map.get("person_a");
+            int personB = (int) map.get("person_b");
+
+            int relationId = personA != memberId ? personA : personB;
+            m.put("memberId", relationId);
+
+            int type = (int) map.get("relation");
+            m.put("type", type);
+
+            String name = userDao.getNameByMemberId(relationId);
+            m.put("name", name);
+
+            result.add(m);
+        }
+        return result;
+    }
+
+    /**
+     * TODO 根据客户ID查询客户姓名
+     * @param memberId 客户ID
+     * @return: String 客户姓名
+     */
+    @Override
+    public String getNameByMemberId(int memberId) {
+        return userDao.getNameByMemberId(memberId);
+    }
+
+    /**
+     * TODO 查询当前用户既往信贷记录
+     * @param memberId 客户id
+     * @param id       当前信贷记录id
+     * @return: List<Map < String, Object>> 当前用户既往信贷记录
+     */
+    @Override
+    public List<Map<String, Object>> getPastRecord(int memberId, int id) {
+        return userDao.getPastRecord(memberId, id);
+    }
+
+    /**
+     * TODO 查询客户雷达图
+     * @param memberId 客户id
+     * @return: Map < String, Double> 雷达图各部分得分
+     */
+    @Override
+    public Map<String, Double> getRadarScore(int memberId) {
+        Map<String, Double> result = new HashMap<>();
+
+        //特征得分加入结果
+        List<Map<String, Double>> features = userDao.getFeature(memberId);
+        Map<String, Double> feature = features.get(0);
+        for (String key : feature.keySet()) {
+            result.put(key, feature.get(key));
+        }
+
+        //收入负债比加入结果
+        double dti = userDao.getDti(memberId);
+        result.put("dti", dti);
+
+        //亲友信誉分加入结果
+        List<Map<String, Object>> relation = userDao.getRelation(memberId);
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Map map : relation) {
+            int personA = (int) map.get("person_a");
+            int personB = (int) map.get("person_b");
+
+            int relationId = personA != memberId ? personA : personB;
+            list.add(relationId);
+        }
+
+        double totalCreditScore = 0;
+        double aveCreditScore = 0;
+
+        if (list != null) {
+            for (int person : list) {
+                Double score = userDao.getCreditScoreByMemberId(person);
+                if (score != null) {
+                    totalCreditScore += score;
+                }
+            }
+            aveCreditScore = totalCreditScore/list.size();
+        }
+
+        result.put("relationCredit",aveCreditScore);
+
+        return result;
+    }
+
+    /**
+     * TODO 根据客户id查询客户综合得分
+     * @param memberId 客户id
+     * @return: Double 客户综合得分
+     */
+    @Override
+    public Double getCreditScoreByMemberId(int memberId) {
+        return userDao.getCreditScoreByMemberId(memberId);
     }
 
 
