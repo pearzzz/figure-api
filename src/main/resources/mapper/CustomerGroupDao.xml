@@ -23,7 +23,7 @@
         FROM customer_group c
                  JOIN loan_rd l ON l.id = c.id
             AND l.member_id = c.member_id
-        WHERE classify = 1
+        WHERE classify = #{classify}
         GROUP BY term;
     </select>
 

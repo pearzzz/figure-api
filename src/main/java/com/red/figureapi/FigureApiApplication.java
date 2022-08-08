@@ -7,10 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @SpringBootApplication
 @ServletComponentScan
 @Slf4j
+@EnableWebSocket
 public class FigureApiApplication {
 
     public static void main(String[] args) {
@@ -24,4 +27,13 @@ public class FigureApiApplication {
     public WebMvcConfigurer webMvcConfigurer() {
         return new NetWorkConfig();
     }
+
+    /**
+     * TODO 定义ServerEndpointExporter实例Bean
+    */
+    //@Bean
+    //public ServerEdpointExporter serverEndpointExporter()
+    //    //{
+    //    //    return new ServerEndpointExporter();
+    //    //}
 }
