@@ -68,7 +68,7 @@ public class TotalDataServiceImpl implements TotalDataService {
     /**
      * TODO 获取不同贷款状态下，贷款比率的范围分布
      * @param loanStatus 贷款状态
-     * @return: int 该贷款状态下，贷款比率在min和max之间的占比
+     * @return: List<Map<String, Object>> 该贷款状态下，贷款比率的占比
      */
     @Override
     public List<Map<String, Object>> searchIntRateDistributionOfLoanStatus(String loanStatus) {

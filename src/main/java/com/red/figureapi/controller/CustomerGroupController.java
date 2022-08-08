@@ -1,7 +1,13 @@
 package com.red.figureapi.controller;
 
+import com.red.figureapi.common.R;
+import com.red.figureapi.service.CustomerGroupService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Description
@@ -12,5 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/customergroup")
 public class CustomerGroupController {
+    @Autowired
+    private CustomerGroupService customerGroupService;
 
+    @GetMapping("/searchAmtDisByClassify")
+    public R searchAmtDisByClassify(HttpServletRequest request) {
+        int classify = Integer.valueOf(request.getParameter("classify"));
+        return R.ok().put("result", customerGroupService.searchAmtDisByClassify(classify));
+    }
 }
