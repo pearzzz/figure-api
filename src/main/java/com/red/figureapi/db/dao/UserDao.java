@@ -1,13 +1,14 @@
 package com.red.figureapi.db.dao;
 
-import com.red.figureapi.db.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
 @Mapper
+@Repository
 public interface UserDao {
     /**
      * TODO 获得有坏帐记录人员（loan_status = "Charged Off"）的相关信息

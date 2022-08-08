@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,4 +56,29 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
         return list;
     }
+
+    // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
+    @Override
+    public List<Map<String, Object>> searchHomeOwnershipSortCount(int classify) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        Map<String, Object> result = new HashMap<>();
+
+        Map<String, Integer> map_0 = customerGroupDao.searchHomeOwnershipSortCount(0);
+        Map<String, Integer> map0 = new HashMap<>();
+        map0.put("有房有贷", map_0.get("MORTGAGE"));
+        map0.put("租赁", map_0.get("RENT"));
+        map0.put("无房无贷", map_0.get("OWN"));
+        result.put("0", map0);
+
+        Map<String, Integer> map_1 = customerGroupDao.searchHomeOwnershipSortCount(1);
+        Map<String, Integer> map1 = new HashMap<>();
+        map1.put("有房有贷", map_1.get("MORTGAGE"));
+        map1.put("租赁", map_1.get("RENT"));
+        map1.put("无房无贷", map_1.get("OWN"));
+        result.put("1", map1);
+
+        list.add(result);
+        return list;
+    }
+
 }

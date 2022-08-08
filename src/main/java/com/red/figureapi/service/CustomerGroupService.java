@@ -18,4 +18,8 @@ public interface CustomerGroupService {
      * @return: List<Map<String, Object>> 聚类类型为classify的贷款金额分布
      */
     List<Map<String, Object>> searchAmtDisByClassify(int classify);
+
+
+    // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
+    List<Map<String, Object>> searchHomeOwnershipSortCount(@Param("classify") int classify);
 }

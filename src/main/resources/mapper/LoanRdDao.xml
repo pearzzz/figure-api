@@ -40,4 +40,5 @@
         where int_rate BETWEEN #{min} and #{max}
           and loan_status = #{loanStatus};
     </select>
+
 </mapper>

@@ -9,4 +9,13 @@
         WHERE loan_amnt BETWEEN #{min} AND #{max}
           AND classify = #{classify};
     </select>
+
+    <select id="searchHomeOwnershipSortCount" resultType="hashmap">
+        SELECT home_ownership as homeOwnershipSortCount, count(*) as value
+        FROM loan_rd as l
+            JOIN customer_group AS c ON l.id = c.id AND l.member_id = c.member_id
+        where c.classify = #{classify}
+            GROUP BY home_ownership;
+    </select>
+
 </mapper>

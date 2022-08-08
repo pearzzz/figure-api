@@ -46,4 +46,5 @@ public interface TotalDataService {
      * @return: int 该贷款状态下，贷款比率在min和max之间的占比
      */
     List<Map<String, Object>> searchIntRateDistributionOfLoanStatus(String loanStatus);
+
 }

@@ -1,13 +1,14 @@
 package com.red.figureapi.db.dao;
 
-import com.red.figureapi.db.pojo.LoanRd;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
 @Mapper
+@Repository
 public interface LoanRdDao {
 
     /**
@@ -51,4 +52,5 @@ public interface LoanRdDao {
      * @return: int 该贷款状态下，贷款比率在min和max之间的记录数量
     */
     int searchIntRateAndLoanStatusNum(@Param("min") int min, @Param("max") int max, @Param("loanStatus") String loanStatus);
+
 }
