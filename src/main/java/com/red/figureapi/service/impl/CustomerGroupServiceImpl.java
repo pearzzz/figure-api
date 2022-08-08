@@ -60,21 +60,25 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
     @Override
     public Map<String, Object> searchHomeOwnershipSortCount(int classify) {
-        List<Map<String, Integer>> list = customerGroupDao.searchHomeOwnershipSortCount(classify);
-        System.out.println(list);
+        List<Map<String, Object>> list = customerGroupDao.searchHomeOwnershipSortCount(classify);
         Map<String, Integer> map1 = new HashMap<>();
-        for(Map<String, Integer> map : list) {
-            if(map.get("MORTGAGE") != null) {
-                map1.put("有房有贷", map.get("MORTGAGE"));
+        for(Map<String, Object> map : list) {
+            if(map.get("home_ownership").equals("MORTGAGE")) {
+                Number count = (Number) map.get("value");
+                int value = count.intValue();
+                map1.put("有房有贷", value);
             }
-            if(map.get("RENT") != null) {
-                map1.put("租赁", map.get("RENT"));
+            if(map.get("home_ownership").equals("RENT")) {
+                Number count = (Number) map.get("value");
+                int value = count.intValue();
+                map1.put("租赁", value);
             }
-            if(map.get("OWN") != null) {
-                map1.put("无房无贷", map.get("OWN"));
+            if(map.get("home_ownership").equals("OWN")) {
+                Number count = (Number) map.get("value");
+                int value = count.intValue();
+                map1.put("无房无贷", value);
             }
         }
-        System.out.println(map1.values());
         Map<String, Object> result = new HashMap<>();
         if(classify == 0) {
             result.put("0", map1);
