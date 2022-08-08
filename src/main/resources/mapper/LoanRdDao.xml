@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.red.figureapi.db.dao.LoanRdDao">
+    <select id="searchTermNum" resultType="hashmap">
+        SELECT term AS name, count(*) AS value
+        FROM loan_rd
+        group by term;
+    </select>
+
+    <select id="searchAmtDistribution" resultType="int">
+        SELECT count(*) AS value
+        from loan_rd
+        where loan_amnt BETWEEN #{min} and #{max};
+    </select>
+
+    <select id="searchProvinceNum" resultType="hashmap">
+        SELECT addr_state AS name, count(*) as value
+        from loan_rd
+        WHERE addr_state != "unknown"
+        GROUP BY addr_state
+        ORDER BY value desc;
+    </select>
+
+    <select id="searchPurposeNum" resultType="hashmap">
+        SELECT purpose as name, count(*) as value
+        from loan_rd
+        GROUP BY purpose
+        ORDER BY value desc;
+    </select>
+
+    <select id="getLoanStatusCount" resultType="int">
+        select count(*) as value
+        from loan_rd
+        where loan_status = #{loanStatus};
+    </select>
+
+    <select id="searchIntRateAndLoanStatusNum" resultType="int">
+        select count(*) as value
+        from loan_rd
+        where int_rate BETWEEN #{min} and #{max}
+          and loan_status = #{loanStatus};
+    </select>
+</mapper>
