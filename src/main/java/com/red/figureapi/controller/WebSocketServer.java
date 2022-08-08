@@ -1,21 +1,13 @@
 package com.red.figureapi.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.PascalNameFilter;
-import com.red.figureapi.common.R;
 import com.red.figureapi.service.TotalDataService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.websocket.OnOpen;
 
 import static com.alibaba.fastjson.JSON.toJSONString;
 import static com.red.figureapi.utils.WebSocketUtils.*;
@@ -26,12 +18,17 @@ import static com.red.figureapi.utils.WebSocketUtils.*;
  * @Email zhaihonghao317@163.com
  * @Date 15:09 2022-08-08
  */
+@Slf4j
 @RestController
 @ServerEndpoint("/websocket/searchTermNum")
 public class WebSocketServer {
 
+    private static TotalDataService totalDataService;
+
     @Autowired
-    private TotalDataService totalDataService;
+    public void WebSocketServer(TotalDataService totalDataService) {
+        WebSocketServer.totalDataService = totalDataService;
+    }
 
     @OnOpen
     public void openSession(Session session) {
@@ -54,15 +51,23 @@ public class WebSocketServer {
     public void onMessage(Session session, String message) {
         System.out.println("接收到消息：" + message);
 
-        String jsonObject = null;
-        if (("searchTermNum").equals(message)) {
-            //转换成json字符串
-            jsonObject = toJSONString(totalDataService.searchTermNum());
-            // 给客户端发送消息
-            sendMessage(session, jsonObject);
+        try {
+            String jsonObject = null;
+            if (("searchTermNum").equals(message)) {
+                //转换成json字符串
+                jsonObject = toJSONString(totalDataService.searchTermNum());
+                // 给客户端发送消息
+                sendMessage(session, jsonObject);
+            } else if (("searchAmtDistribution").equals(message)) {
+                //转换成json字符串
+                jsonObject = toJSONString(totalDataService.searchTermNum());
+                // 给客户端发送消息
+                sendMessage(session, jsonObject);
+            }
+        } catch (Exception e) {
+            log.warn("get data failed, message is: {}, e: {}", message, e);
         }
     }
-
 
     @OnClose
     public void onClose(Session session) {
