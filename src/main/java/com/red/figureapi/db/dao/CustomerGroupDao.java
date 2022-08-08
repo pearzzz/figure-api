@@ -1,6 +1,5 @@
 package com.red.figureapi.db.dao;
 
-import com.red.figureapi.db.pojo.CustomerGroup;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

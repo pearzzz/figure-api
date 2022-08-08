@@ -59,7 +59,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
     @Override
-    public Map<String, Object> searchHomeOwnershipSortCount(int classify) {
+    public Map<String, Integer> searchHomeOwnershipSortCount(int classify) {
         List<Map<String, Object>> list = customerGroupDao.searchHomeOwnershipSortCount(classify);
         Map<String, Integer> map1 = new HashMap<>();
         for(Map<String, Object> map : list) {
@@ -79,14 +79,14 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 map1.put("无房无贷", value);
             }
         }
-        Map<String, Object> result = new HashMap<>();
-        if(classify == 0) {
-            result.put("0", map1);
-        }
-        else {
-            result.put("1", map1);
-        }
-        return result;
+//        Map<String, Object> result = new HashMap<>();
+//        if(classify == 0) {
+//            result.put("0", map1);
+//        }
+//        else {
+//            result.put("1", map1);
+//        }
+        return map1;
     }
 
     /**
