@@ -81,4 +81,29 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         return list;
     }
 
+    /**
+     * TODO 根据聚类类别获得期数分布
+     * @param classify 聚类类别
+     * @return: List<HashMap < String, Object>> 聚类类型为classify的期数分布
+     */
+    @Override
+    public Map<String, Integer> searchTermDisByClassify(int classify) {
+        Map<String, Integer> result = new HashMap<>();
+
+        List<HashMap<Integer, Integer>> list = customerGroupDao.searchTermDisByClassify(classify);
+        System.out.println(list);
+
+        for (Map<Integer, Integer> map : list) {
+            int term = map.get("term");
+            Number count = map.get("count");
+            int value = count.intValue();
+            if (term < 40) {
+                result.put("短期贷款", result.getOrDefault("短期贷款", 0) + value);
+            } else {
+                result.put("长期贷款", result.getOrDefault("长期贷款", 0) + value);
+            }
+        }
+
+        return result;
+    }
 }

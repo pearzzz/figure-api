@@ -33,4 +33,9 @@ public class CustomerGroupController {
         return R.ok().put("result", customerGroupService.searchHomeOwnershipSortCount(classify));
     }
 
+    @GetMapping("/searchTermDisByClassify")
+    public R searchTermDisByClassify(HttpServletRequest request) {
+        int classify = Integer.valueOf(request.getParameter("classify"));
+        return R.ok().put("result", customerGroupService.searchTermDisByClassify(classify));
+    }
 }
