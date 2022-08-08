@@ -27,7 +27,6 @@ import java.util.Map;
 @RequestMapping("/esquery")
 public class EsQueryController {
 
-
     @Autowired
     @Qualifier("restHighLevelClient")
     private RestHighLevelClient client;
