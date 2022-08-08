@@ -34,7 +34,7 @@ public class EsQueryController {
     // ElasticSearch条件带分页查询
     @GetMapping("/queryByPage/{current}")
     public List<Map<String, Object>> queryListBypage(@PathVariable("current") int current, HttpServletRequest httpServletRequest) throws IOException {
-        SearchRequest request = new SearchRequest().indices("es_load_rd"); //创建要搜索的数据库对象
+        SearchRequest request = new SearchRequest().indices("es_loan_rd"); //创建要搜索的数据库对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); //构建搜索构造器
         searchSourceBuilder.trackTotalHits(true); //开启查询范围最大化设置，否则无法查询10000条以上数据
 
