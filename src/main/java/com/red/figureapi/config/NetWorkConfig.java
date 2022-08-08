@@ -1,5 +1,6 @@
 package com.red.figureapi.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Email zhaihonghao317@163.com
  * @Date 14:00 2022-08-03
  */
+@Configuration
 public class NetWorkConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
