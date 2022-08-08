@@ -2,7 +2,6 @@ package com.red.figureapi.service;
 
 import org.apache.ibatis.annotations.Param;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ public interface CustomerGroupService {
 
 
     // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
-    List<Map<String, Object>> searchHomeOwnershipSortCount(@Param("classify") int classify);
+    Map<String, Object> searchHomeOwnershipSortCount(@Param("classify") int classify);
 
     /**
      * TODO 根据聚类类别获得期数分布

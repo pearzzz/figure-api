@@ -59,26 +59,21 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
     @Override
-    public List<Map<String, Object>> searchHomeOwnershipSortCount(int classify) {
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> result = new HashMap<>();
-
-        List<Map<String, Integer>> map_0 = customerGroupDao.searchHomeOwnershipSortCount(0);
-        Map<String, Integer> map0 = new HashMap<>();
-        map0.put("有房有贷", map_0.get(0).get("MORTGAGE"));
-        map0.put("租赁", map_0.get(1).get("RENT"));
-        map0.put("无房无贷", map_0.get(2).get("OWN"));
-        result.put("0", map0);
-
-        List<Map<String, Integer>> map_1 = customerGroupDao.searchHomeOwnershipSortCount(1);
+    public Map<String, Object> searchHomeOwnershipSortCount(int classify) {
+        List<Map<String, Integer>> list = customerGroupDao.searchHomeOwnershipSortCount(classify);
+        System.out.println(list);
         Map<String, Integer> map1 = new HashMap<>();
-        map1.put("有房有贷", map_1.get(0).get("MORTGAGE"));
-        map1.put("租赁", map_1.get(1).get("RENT"));
-        map1.put("无房无贷", map_1.get(2).get("OWN"));
-        result.put("1", map1);
-
-        list.add(result);
-        return list;
+        map1.put("有房有贷", list.get(0).get("MORTGAGE"));
+        map1.put("租赁", list.get(1).get("RENT"));
+        map1.put("无房无贷", list.get(2).get("OWN"));
+        Map<String, Object> result = new HashMap<>();
+        if(classify == 0) {
+            result.put("0", map1);
+        }
+        else {
+            result.put("1", map1);
+        }
+        return result;
     }
 
     /**
