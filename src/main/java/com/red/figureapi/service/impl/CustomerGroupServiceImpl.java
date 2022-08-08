@@ -63,18 +63,18 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> result = new HashMap<>();
 
-        Map<String, Integer> map_0 = customerGroupDao.searchHomeOwnershipSortCount(0);
+        List<Map<String, Integer>> map_0 = customerGroupDao.searchHomeOwnershipSortCount(0);
         Map<String, Integer> map0 = new HashMap<>();
-        map0.put("有房有贷", map_0.get("MORTGAGE"));
-        map0.put("租赁", map_0.get("RENT"));
-        map0.put("无房无贷", map_0.get("OWN"));
+        map0.put("有房有贷", map_0.get(0).get("MORTGAGE"));
+        map0.put("租赁", map_0.get(1).get("RENT"));
+        map0.put("无房无贷", map_0.get(2).get("OWN"));
         result.put("0", map0);
 
-        Map<String, Integer> map_1 = customerGroupDao.searchHomeOwnershipSortCount(1);
+        List<Map<String, Integer>> map_1 = customerGroupDao.searchHomeOwnershipSortCount(1);
         Map<String, Integer> map1 = new HashMap<>();
-        map1.put("有房有贷", map_1.get("MORTGAGE"));
-        map1.put("租赁", map_1.get("RENT"));
-        map1.put("无房无贷", map_1.get("OWN"));
+        map1.put("有房有贷", map_1.get(0).get("MORTGAGE"));
+        map1.put("租赁", map_1.get(1).get("RENT"));
+        map1.put("无房无贷", map_1.get(2).get("OWN"));
         result.put("1", map1);
 
         list.add(result);
