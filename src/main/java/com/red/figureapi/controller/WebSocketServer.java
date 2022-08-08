@@ -53,17 +53,20 @@ public class WebSocketServer {
 
         try {
             String jsonObject = null;
+            //转换成json字符串
             if (("searchTermNum").equals(message)) {
-                //转换成json字符串
                 jsonObject = toJSONString(totalDataService.searchTermNum());
-                // 给客户端发送消息
-                sendMessage(session, jsonObject);
             } else if (("searchAmtDistribution").equals(message)) {
-                //转换成json字符串
-                jsonObject = toJSONString(totalDataService.searchTermNum());
-                // 给客户端发送消息
-                sendMessage(session, jsonObject);
+                jsonObject = toJSONString(totalDataService.searchAmtDistribution());
+            } else if (("searchProvinceNum").equals(message)) {
+                jsonObject = toJSONString(totalDataService.searchProvinceNum());
+            } else if (("searchPurposeNum").equals(message)) {
+                jsonObject = toJSONString(totalDataService.searchPurposeNum());
+            } else if (("searchIntRateDistributionOfLoanStatus").equals(message)) {
+                jsonObject = toJSONString(totalDataService.searchIntRateDistributionOfLoanStatus());
             }
+            // 给客户端发送消息
+            sendMessage(session, jsonObject);
         } catch (Exception e) {
             log.warn("get data failed, message is: {}, e: {}", message, e);
         }
@@ -76,7 +79,6 @@ public class WebSocketServer {
 
         // 通知当前在线人数
         sendCurrentOnlineUsersSizeMsg();
-
 
         try {
             session.close();

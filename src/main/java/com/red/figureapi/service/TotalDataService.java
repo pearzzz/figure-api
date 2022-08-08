@@ -1,7 +1,5 @@
 package com.red.figureapi.service;
 
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +19,9 @@ public interface TotalDataService {
 
     /**
      * TODO 统计不同贷款金额的记录数量
-     * @param min 范围最小值
-     * @param max 范围最大值
      * @return: int 贷款金额在最小值和最大值之间的记录数量
      */
-    int searchAmtDistribution(int min, int max);
+    List<Map<String, Integer>> searchAmtDistribution();
 
     /**
      * TODO 统计各省人数
@@ -45,6 +41,7 @@ public interface TotalDataService {
      * @param loanStatus 贷款状态
      * @return: int 该贷款状态下，贷款比率在min和max之间的占比
      */
-    List<Map<String, Object>> searchIntRateDistributionOfLoanStatus(String loanStatus);
+    List<Map<String, Object>> searchIntRateDistributionOfLoanStatu(String loanStatus);
 
+    Map<String, List> searchIntRateDistributionOfLoanStatus();
 }

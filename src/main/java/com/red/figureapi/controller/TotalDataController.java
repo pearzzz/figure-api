@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @Description
  * @Author pearz
@@ -32,21 +27,7 @@ public class TotalDataController {
 
     @GetMapping("/searchAmtDistribution")
     public R searchAmtDistribution() {
-        List<Map> list = new ArrayList<>();
-        for (int i = 0, min = 1, max = 5000; i < 5; i++, min = min + 5000, max = max + 5000) {
-            Map<String, Integer> map = new HashMap<>();
-            map.put("min", min);
-            map.put("max", max);
-            map.put("value", totalDataService.searchAmtDistribution(min, max));
-            list.add(map);
-        }
-
-        Map<String, Integer> map = new HashMap<>();
-        map.put("min", 25001);
-        map.put("value", totalDataService.searchAmtDistribution(25001, Integer.MAX_VALUE));
-        list.add(map);
-
-        return R.ok().put("result", list);
+        return R.ok().put("result", totalDataService.searchAmtDistribution());
     }
 
     @GetMapping("/searchProvinceNum")
@@ -61,8 +42,6 @@ public class TotalDataController {
 
     @GetMapping("/searchIntRateDistributionOfLoanStatus")
     public R searchIntRateDistributionOfLoanStatus() {
-        List<Map<String, Object>> fullyPaid = totalDataService.searchIntRateDistributionOfLoanStatus("Fully Paid");
-        List<Map<String, Object>> chargedOff = totalDataService.searchIntRateDistributionOfLoanStatus("Charged Off");
-        return R.ok().put("FullyPaid", fullyPaid).put("ChargedOff", chargedOff);
+        return R.ok().put("result", totalDataService.searchIntRateDistributionOfLoanStatus());
     }
 }

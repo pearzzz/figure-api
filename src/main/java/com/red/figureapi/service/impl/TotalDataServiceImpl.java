@@ -38,14 +38,25 @@ public class TotalDataServiceImpl implements TotalDataService {
 
     /**
      * TODO 统计不同贷款金额的记录数量
-     * @param min 范围最小值
-     * @param max 范围最大值
      * @return: int 贷款金额在最小值和最大值之间的记录数量
      */
     @Override
-    public int searchAmtDistribution(int min, int max) {
+    public List<Map<String, Integer>> searchAmtDistribution() {
+        List<Map<String, Integer>> list = new ArrayList<>();
+        for (int i = 0, min = 1, max = 5000; i < 5; i++, min = min + 5000, max = max + 5000) {
+            Map<String, Integer> map = new HashMap<>();
+            map.put("min", min);
+            map.put("max", max);
+            map.put("value", loanRdDao.searchAmtDistribution(min, max));
+            list.add(map);
+        }
 
-        return loanRdDao.searchAmtDistribution(min, max);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("min", 25001);
+        map.put("value", loanRdDao.searchAmtDistribution(25001, Integer.MAX_VALUE));
+        list.add(map);
+
+        return list;
     }
 
     /**
@@ -72,7 +83,7 @@ public class TotalDataServiceImpl implements TotalDataService {
      * @return: List<Map<String, Object>> 该贷款状态下，贷款比率的占比
      */
     @Override
-    public List<Map<String, Object>> searchIntRateDistributionOfLoanStatus(String loanStatus) {
+    public List<Map<String, Object>> searchIntRateDistributionOfLoanStatu(String loanStatus) {
         List<Map<String, Object>> list = new ArrayList<>();
 
         //获取贷款状态对应的记录数量
@@ -88,6 +99,16 @@ public class TotalDataServiceImpl implements TotalDataService {
             list.add(map);
         }
         return list;
+    }
+
+    @Override
+    public Map<String, List> searchIntRateDistributionOfLoanStatus() {
+        Map<String, List> result = new HashMap<>();
+        List<Map<String, Object>> fullyPaid = searchIntRateDistributionOfLoanStatu("Fully Paid");
+        List<Map<String, Object>> chargedOff = searchIntRateDistributionOfLoanStatu("Charged Off");
+        result.put("fullyPaid", fullyPaid);
+        result.put("chargedOff", chargedOff);
+        return result;
     }
 
 }
