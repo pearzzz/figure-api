@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description
  * @Author pearz
@@ -42,6 +45,8 @@ public class TotalDataController {
 
     @GetMapping("/searchIntRateDistributionOfLoanStatus")
     public R searchIntRateDistributionOfLoanStatus() {
-        return R.ok().put("result", totalDataService.searchIntRateDistributionOfLoanStatus());
+        List<Map<String, Object>> fullyPaid = totalDataService.searchIntRateDistributionOfLoanStatu("Fully Paid");
+        List<Map<String, Object>> chargedOff = totalDataService.searchIntRateDistributionOfLoanStatu("Charged Off");
+        return R.ok().put("FullyPaid", fullyPaid).put("ChargedOff", chargedOff);
     }
 }
