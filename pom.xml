@@ -9,9 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modules>
-        <module>
-            springcloud
-        </module>
+        <module>springcloud</module>
     </modules>
     <groupId>com.red</groupId>
     <artifactId>figure-api</artifactId>
