@@ -5,12 +5,20 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.Scroll;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +42,7 @@ public class EsQueryController {
     // ElasticSearch条件带分页查询
     @GetMapping("/queryByPage/{current}")
     public List<Map<String, Object>> queryListBypage(@PathVariable("current") int current, HttpServletRequest httpServletRequest) throws IOException {
-        SearchRequest request = new SearchRequest().indices("es_loan_rd"); //创建要搜索的数据库对象
+        SearchRequest request = new SearchRequest().indices("es_load_rd"); //创建要搜索的数据库对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); //构建搜索构造器
         searchSourceBuilder.trackTotalHits(true); //开启查询范围最大化设置，否则无法查询10000条以上数据
 
@@ -64,11 +72,11 @@ public class EsQueryController {
         }
 
         // 将条件查询构造器注入总的搜索构造器中
-        searchSourceBuilder.query(boolQueryBuilder).size(1000000);
+        searchSourceBuilder.query(boolQueryBuilder).sort("id", SortOrder.DESC).size(10000000);
 
         // 进行分页的设置
-        searchSourceBuilder.from(current); //当前页
-        searchSourceBuilder.size(8); //每页所放的数据量
+        searchSourceBuilder.from((current - 1) * 8); //当前页的首个数据所在索引位置
+        searchSourceBuilder.size(8); //每一页所放的数据量
 
         // 获取搜索响应对象
         request.source(searchSourceBuilder);

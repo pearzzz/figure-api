@@ -25,7 +25,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     private CustomerGroupDao customerGroupDao;
 
-
     /**
      * TODO 根据聚类类别获得贷款金额分布
      * @param classify 聚类类别
@@ -59,34 +58,32 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
     @Override
-    public Map<String, Integer> searchHomeOwnershipSortCount(int classify) {
+    public List<Map<String, Object>> searchHomeOwnershipSortCount(int classify) {
         List<Map<String, Object>> list = customerGroupDao.searchHomeOwnershipSortCount(classify);
-        Map<String, Integer> map1 = new HashMap<>();
+        List<Map<String, Object>> result = new ArrayList<>();
         for(Map<String, Object> map : list) {
+            Map<String, Object> map1 = new HashMap<>();
             if(map.get("home_ownership").equals("MORTGAGE")) {
                 Number count = (Number) map.get("value");
                 int value = count.intValue();
-                map1.put("有房有贷", value);
+                map1.put("name", "有房有贷");
+                map1.put("value", value);
             }
             if(map.get("home_ownership").equals("RENT")) {
                 Number count = (Number) map.get("value");
                 int value = count.intValue();
-                map1.put("租赁", value);
+                map1.put("name", "无房");
+                map1.put("value", value);
             }
             if(map.get("home_ownership").equals("OWN")) {
                 Number count = (Number) map.get("value");
                 int value = count.intValue();
-                map1.put("无房无贷", value);
+                map1.put("name", "有房无贷");
+                map1.put("value", value);
             }
+            result.add(map1);
         }
-//        Map<String, Object> result = new HashMap<>();
-//        if(classify == 0) {
-//            result.put("0", map1);
-//        }
-//        else {
-//            result.put("1", map1);
-//        }
-        return map1;
+        return result;
     }
 
     /**
@@ -97,21 +94,17 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Override
     public Map<String, Integer> searchTermDisByClassify(int classify) {
         Map<String, Integer> result = new HashMap<>();
-
         List<HashMap<Integer, Integer>> list = customerGroupDao.searchTermDisByClassify(classify);
-        System.out.println(list);
-
-        for (Map<Integer, Integer> map : list) {
+        for(Map<Integer, Integer> map : list) {
             int term = map.get("term");
             Number count = map.get("count");
             int value = count.intValue();
-            if (term < 40) {
+            if(term < 40) {
                 result.put("短期贷款", result.getOrDefault("短期贷款", 0) + value);
             } else {
                 result.put("长期贷款", result.getOrDefault("长期贷款", 0) + value);
             }
         }
-
         return result;
     }
 }

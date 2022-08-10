@@ -7,4 +7,5 @@ package com.red.figureapi.controller.form;
  * @Date 21:41 2022-08-08
  */
 public class LoginForm {
+
 }

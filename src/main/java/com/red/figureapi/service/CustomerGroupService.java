@@ -21,7 +21,7 @@ public interface CustomerGroupService {
 
 
     // 获取客群房屋情况的各个类别的数量(分为客群类别为0或1的情况)
-    Map<String, Integer> searchHomeOwnershipSortCount(@Param("classify") int classify);
+    List<Map<String, Object>> searchHomeOwnershipSortCount(@Param("classify") int classify);
 
     /**
      * TODO 根据聚类类别获得期数分布
