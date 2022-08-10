@@ -95,7 +95,7 @@
     </select>
 
     <select id="getFeature" resultType="hashmap">
-        SELECT past_credit, other_indicators, credit_risk
+        SELECT past_credit, othe_personal_indicators, credit_risk
         FROM result
         where member_id = #{memberId};
     </select>

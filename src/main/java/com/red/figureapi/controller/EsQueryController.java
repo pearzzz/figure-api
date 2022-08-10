@@ -39,7 +39,6 @@ public class EsQueryController {
     @Qualifier("restHighLevelClient")
     private RestHighLevelClient client;
 
-
     // ElasticSearch条件带分页查询
     @GetMapping("/queryByPage/{current}")
     public List<Map<String, Object>> queryListBypage(@PathVariable("current") int current, HttpServletRequest httpServletRequest) throws IOException {

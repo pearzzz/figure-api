@@ -141,19 +141,20 @@ public class UserServiceImpl implements UserService {
         double totalCreditScore = 0;
         double aveCreditScore = 0;
 
-        if (list.size() == 0) {
-            for (int person : list) {
+        if(list.size() != 0) {
+            for(int person : list) {
                 Double score = userDao.getCreditScoreByMemberId(person);
                 if (score != null) {
                     totalCreditScore += score;
                 }
             }
-            aveCreditScore = totalCreditScore/list.size();
-        } else {
+            aveCreditScore = totalCreditScore / list.size();
+        }
+        else {
             aveCreditScore = 1;
         }
 
-        result.put("relationCredit",aveCreditScore);
+        result.put("relationCredit", aveCreditScore);
 
         return result;
     }
@@ -167,6 +168,5 @@ public class UserServiceImpl implements UserService {
     public Double getCreditScoreByMemberId(int memberId) {
         return userDao.getCreditScoreByMemberId(memberId);
     }
-
 
 }
