@@ -138,17 +138,17 @@ public class UserServiceImpl implements UserService {
             list.add(relationId);
         }
 
-        double totalCreditScore = 0;
+        int count = 0;
         double aveCreditScore = 0;
 
         if(list.size() != 0) {
             for(int person : list) {
                 Double score = userDao.getCreditScoreByMemberId(person);
-                if (score != null) {
-                    totalCreditScore += score;
+                if (score >= 40) {
+                    count++; //得分大于40的亲友人数
                 }
             }
-            aveCreditScore = totalCreditScore / list.size();
+            aveCreditScore = count / (double ) list.size();
         }
         else {
             aveCreditScore = 1;
